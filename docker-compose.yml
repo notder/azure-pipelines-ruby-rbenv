@@ -1,0 +1,18 @@
+version: '3'
+services:
+  agent-01:
+    image: notder/azure-pipelines-ruby-rbenv:latest
+    environment:
+      AZP_POOL: [agent_pool]
+      AZP_AGENT_NAME: [agent_name]
+      AZP_URL: https://dev.azure.com/[organization]
+      AZP_TOKEN: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    networks:
+      - azure-rbenv-network
+
+networks:
+  azure-rbenv-network:
+    driver: bridge
